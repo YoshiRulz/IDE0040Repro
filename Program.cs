@@ -1,9 +1,9 @@
 ﻿// See https://aka.ms/new-console-template for more information
 Console.WriteLine("Hello, World!");
 
-/*internal*/ class AClass {}
-public interface AnInterface {
-	/*public*/ int Number { get; }
-	public string String { get; }
-	public struct AStruct {}
+/*internal*/ class AClass {} // correctly flagged
+public interface AnInterface { // correctly not flagged
+	/*public*/ int Number { get; } // correctly not flagged
+	public string String { get; } // correctly flagged
+	public struct AStruct {} // erroneously flagged
 }

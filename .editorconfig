@@ -1,0 +1,4 @@
+[*.cs]
+dotnet_style_require_accessibility_modifiers = for_non_interface_members
+
+dotnet_diagnostic.IDE0040.severity = error
