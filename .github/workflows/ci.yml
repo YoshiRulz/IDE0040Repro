@@ -1,0 +1,28 @@
+on: [push, pull_request, workflow_dispatch]
+name: Build and test main solution
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    name: Build
+    runs-on: ${{matrix.os.fullname}}
+    strategy:
+       fail-fast: false
+       matrix:
+          os:
+            - { prettyname: Linux, fullname: ubuntu-22.04 }
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install .NET SDK
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "8"
+
+      - name: Do build
+        run: dotnet build
+        shell: pwsh
